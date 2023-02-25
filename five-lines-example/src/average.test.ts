@@ -8,8 +8,10 @@ const sum = (arr: number[]) => {
     return answer;
 }
 
+const size = (arr: number[]) => arr.length
+
 const average = (arr: number[]) => {
-    return sum(arr) / arr.length;
+    return sum(arr) / size(arr);
 }
 
 test('average', () => {
