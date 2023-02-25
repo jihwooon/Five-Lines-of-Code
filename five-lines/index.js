@@ -121,7 +121,10 @@ function draw() {
     var canvas = document.getElementById("GameCanvas");
     var g = canvas.getContext("2d");
     g.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw map
+    drawMap(g);
+    drawPlayer(g);
+}
+function drawMap(g) {
     for (var y = 0; y < map.length; y++) {
         for (var x = 0; x < map[y].length; x++) {
             if (map[y][x] === Tile.FLUX)
@@ -140,7 +143,8 @@ function draw() {
                 g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
-    // Draw player
+}
+function drawPlayer(g) {
     g.fillStyle = "#ff0000";
     g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
