@@ -1,4 +1,3 @@
-//TODO 열거형의 이름을 변경하라
 enum RawTrafficLight {
     RED, YELLOW, GREEN
 }
@@ -28,8 +27,9 @@ class Green implements TrafficLight2 {
 }
 
 const CYCLE = [RawTrafficLight.RED, RawTrafficLight.YELLOW, RawTrafficLight.GREEN]
-function updateCarForLight(current: RawTrafficLight) {
-    if(current === RawTrafficLight.RED) {
+//TODO 이전 타입에서 임시 이름으로 변경하고 일치 여부 검사를 하라
+function updateCarForLight(current: TrafficLight2) {
+    if(current.isRed()) {
         // car.stop()
     } else {
         // car.drive()
