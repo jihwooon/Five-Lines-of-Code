@@ -1,4 +1,3 @@
-
 const TILE_SIZE = 30;
 const FPS = 30;
 const SLEEP = 1000 / FPS;
@@ -18,14 +17,15 @@ enum RawInput {
   UP, DOWN, LEFT, RIGHT
 }
 
-interface Input2 {
+interface Input {
   isRight(): boolean
   isLeft(): boolean
   isUp(): boolean
   isDown(): boolean
+  handle(): void
 }
 
-class Right implements Input2 {
+class Right implements Input {
   isRight(): boolean {
     return true
   }
@@ -41,9 +41,13 @@ class Right implements Input2 {
   isDown(): boolean {
     return false
   }
+  
+  handle() {
+    moveHorizontal(1);
+  }
 }
 
-class Left implements Input2 {
+class Left implements Input {
   isRight(): boolean {
     return false
   }
@@ -59,27 +63,13 @@ class Left implements Input2 {
   isDown(): boolean {
     return false
   }
-}
 
-class Up implements Input2 {
-  isRight(): boolean {
-    return false;
-  }
-
-  isLeft(): boolean {
-    return false
-  }
-
-  isUp(): boolean {
-    return true
-  }
-
-  isDown(): boolean {
-    return false
+  handle() {
+    moveHorizontal(-1);
   }
 }
 
-class Down implements Input2 {
+class Up implements Input {
   isRight(): boolean {
     return false;
   }
@@ -89,11 +79,37 @@ class Down implements Input2 {
   }
 
   isUp(): boolean {
+    return true
+  }
+
+  isDown(): boolean {
+    return false
+  }
+
+  handle() {
+    moveHorizontal(-1);
+  }
+}
+
+class Down implements Input {
+  isRight(): boolean {
+    return false;
+  }
+
+  isLeft(): boolean {
+    return false
+  }
+
+  isUp(): boolean {
     return false
   }
 
   isDown(): boolean {
     return true
+  }
+
+  handle() {
+    moveHorizontal(1);
   }
 }
 
@@ -108,7 +124,7 @@ let map: Tile[][] = [
   [2, 2, 2, 2, 2, 2, 2, 2],
 ];
 
-let inputs: Input2[] = [];
+let inputs: Input[] = [];
 
 function remove(tile: Tile) {
   for (let y = 0; y < map.length; y++) {
@@ -171,15 +187,8 @@ function handleInputs() {
   }
 }
 
-function handleInput(input: Input2) {
-  if (input.isLeft())
-    moveHorizontal(-1);
-  else if (input.isRight())
-    moveHorizontal(1);
-  else if (input.isUp())
-    moveVertical(-1);
-  else if (input.isDown())
-    moveVertical(1);
+function handleInput(input: Input) {
+  input.handle()
 }
 
 function updateMap() {
