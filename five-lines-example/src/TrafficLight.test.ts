@@ -9,14 +9,14 @@ interface TrafficLight {
     updateCar(): void
 }
 
-//TODO 함수를 클래스로 복제하라
+//TODO 
 class Red implements TrafficLight {
     isRed(): boolean { return true }
     isYellow(): boolean { return false }
     isGreen(): boolean { return false }
     updateCar(): void {}
     updateCarForLight() {
-        if(this.isRed()) {
+        if(true) {
             // car.stop()
         } else {
             // car.drive()
@@ -30,7 +30,7 @@ class Yellow implements TrafficLight {
     isGreen(): boolean { return false }
     updateCar() {}
     updateCarForLight() {
-        if(this.isYellow()) {
+        if(false) {
             // car.stop()
         } else {
             // car.drive()
@@ -44,7 +44,7 @@ class Green implements TrafficLight {
     isGreen(): boolean { return true }
     updateCar() {}
     updateCarForLight() {
-        if(this.isGreen()) {
+        if(false) {
             // car.stop()
         } else {
             // car.drive()
